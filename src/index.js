@@ -2,14 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
-import Register from './routes/register'
-import Login from "./routes/login";
+
 import App from "./App";
+import Register from "./routes/login-and-registration/register";
+import Login from "./routes/login-and-registration/login";
+import ProtectedAuth from "./routes/protected";
+
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import ProfileDashboard from "./routes/profile/profile-dashboard";
 
 const router = createBrowserRouter([
   {
@@ -21,26 +24,36 @@ const router = createBrowserRouter([
         element: <Root />,
       },
       {
-        path: 'register',
+        path: "register",
         element: <Register />,
       },
       {
-        path: 'dashboard',
+        path: "dashboard",
         element: <h1 className="text-white text-xl">dashboard</h1>,
       },
       {
-        path: 'login',
+        path: "login",
         element: <Login />,
       },
     ],
   },
-  
-  
+  {
+    path: "auth",
+    element: <ProtectedAuth />,
+    children: [
+      {
+        path: "dashboard",
+        element: <ProfileDashboard />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

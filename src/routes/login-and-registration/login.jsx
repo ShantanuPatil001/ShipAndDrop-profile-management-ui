@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/httpapi";
+import { login } from "../../api/httpapi";
+import { useDispatch } from "react-redux";
+import { setAuthValues } from "../../redux/authstore/auth";
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -10,6 +12,7 @@ export default function Login() {
 
   const [error, setError] = useState("1");
   const [flag, setFlag] = useState(false);
+  const authDispatch = useDispatch();
   let navigate = useNavigate();
 
   const formValidation = (e) => {
@@ -30,15 +33,18 @@ export default function Login() {
   const handleLogin = async () => {
     setFlag(true);
     let data = null;
-    if (form.email  && form.password) {
+    if (form.email && form.password) {
       data = {
         email: form.email,
         password: form.password,
       };
       await login(data)
         .then((res) => {
-          if (res.code === "000") navigate("/dashboard");
-          else {
+          if (res.code === "000") {
+            authDispatch(setAuthValues(res));
+
+            navigate("/auth/dashboard");
+          } else {
             setError("Opps! Internal Error. Please try again in some time");
           }
           setFlag(false);
@@ -56,11 +62,13 @@ export default function Login() {
   };
 
   return (
-    <div className="text-white flex flex-row w-full h-full">
+    <div className="dark:text-white flex flex-row w-full h-full">
       <div className="w-full tablet:w-1/2 tablet:pt-20 pt-16">
         <div
           className={`${
-            error.trim() !== "1" ? "bg-red-500" : "bg-black text-black"
+            error.trim() !== "1"
+              ? "bg-red-500 text-white"
+              : "bg-white text-white dark:bg-black dark:text-black"
           } p-4`}
         >
           <h1>{error}</h1>
@@ -68,22 +76,22 @@ export default function Login() {
         <form className="flex flex-col space-y-6 w-1/2 mx-auto my-20">
           <h1 className="font-bold text-4xl py-4">Sign In</h1>
 
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="email"
               type="email"
               placeholder="Email"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.email}
               onChange={formValidation}
             />
           </fieldset>
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="password"
               type="password"
               placeholder="Password"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.password}
               onChange={formValidation}
             />
@@ -92,11 +100,11 @@ export default function Login() {
             type="button"
             disabled={flag}
             onClick={handleLogin}
-            className="flex flex-row items-center justify-center text-xs font-bold text-white border-2 rounded-full px-4 border-blue-500 hover:bg-blue-700 tablet:px-8 py-1 tablet:text-lg"
+            className="flex flex-row items-center justify-center text-xs font-bold text-black dark:text-white border-2 rounded-full px-4 border-blue-500 hover:bg-blue-700 tablet:px-8 py-1 tablet:text-lg"
           >
             {flag ? (
               <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                className="animate-spin -ml-1 mr-3 h-5 w-5 text-black dark:text-white"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -124,7 +132,7 @@ export default function Login() {
       <div className="w-0 tablet:w-1/2">
         <img
           alt="register for drop ship"
-          src={require("../assets/images/RegisterPage.jpg")}
+          src={require("../../assets/images/RegisterPage.jpg")}
           className="h-0 w-0 tablet:h-screen tablet:w-full"
         />
       </div>

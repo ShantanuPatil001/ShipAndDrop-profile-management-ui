@@ -28,12 +28,15 @@ const login = (login) => {
       .then((userCredential) => {
         // Signed in
         user = userCredential.user;
+        console.log(user);
         user.getIdToken(true).then((idToken) => {
-          axios
+           axios
             .get(`/api/login?token=${idToken}`, {
               headers: headers,
             })
             .then((response) => {
+              console.log(response);
+              response.data.token = idToken;
               resolve(response.data);
             })
             .catch((error) => {
@@ -67,4 +70,20 @@ const login = (login) => {
   });
 };
 
-export { registerCustomer, login };
+
+const authVerifyToken = (token) => {
+  return new Promise(async (resolve, reject) => {
+    await axios
+      .get(`/api/login?token=${token}`, {
+        headers: headers,
+      })
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error.response.data);
+      });
+  });
+};
+
+export { registerCustomer, login, authVerifyToken };

@@ -11,3 +11,10 @@ button:focus {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    @apply dark:text-white;
+    @apply dark:bg-black;
+    @apply text-black;
+    @apply bg-white;
+}

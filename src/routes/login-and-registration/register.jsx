@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerCustomer } from "../api/httpapi";
+import { registerCustomer } from "../../api/httpapi";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -79,64 +79,66 @@ export default function Register() {
   };
 
   return (
-    <div className="text-white flex flex-row w-full h-full">
-      <div className="w-full tablet:w-1/2 tablet:pt-20 pt-16">
+    <div className="dark:text-white flex flex-row w-full h-full ">
+      <div className="w-full tablet:w-1/2 tablet:pt-20 pt-16 border-r-2 border-black">
         <div
           className={`${
-            error.trim() !== "1" ? "bg-red-500" : "bg-black text-black"
+            error.trim() !== "1"
+              ? "bg-red-500 text-white"
+              : "bg-white text-white dark:bg-black dark:text-black"
           } p-4`}
         >
           <h1>{error}</h1>
         </div>
-        <form className="flex flex-col space-y-6 w-1/2 mx-auto my-20">
+        <form className="flex flex-col space-y-6 w-1/2 mx-auto my-20 ">
           <h1 className="font-bold text-4xl py-4">Sign Up</h1>
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="firstName"
               type="text"
               placeholder="First Name"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.firstName}
               onChange={formValidation}
             />
           </fieldset>
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="lastName"
               type="text"
               placeholder="Last Name"
-              className="bg-black w-full "
+              className="dark:bg-black w-full "
               value={form.lastName}
               onChange={formValidation}
             />
           </fieldset>
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="email"
               type="email"
               placeholder="Email"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.email}
               onChange={formValidation}
             />
           </fieldset>
-          <fieldset className="p-2 border-2 border-white rounded-md flex flex-row space-x-2">
-            <h1>+91</h1>
+          <fieldset className="p-2 border-2 border-black dark:border-white rounded-md flex flex-row space-x-2">
+            <h1 className="text-black dark:text-white">+91</h1>
             <input
               name="phoneNumber"
               type="text"
               placeholder="Phone Number"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.phoneNumber}
               onChange={formValidation}
             />
           </fieldset>
-          <fieldset className="border-2 border-white p-2 rounded-md">
+          <fieldset className="border-2 border-black dark:border-white p-2 rounded-md">
             <input
               name="password"
               type="password"
               placeholder="Password"
-              className="bg-black w-full"
+              className="dark:bg-black w-full"
               value={form.password}
               onChange={formValidation}
             />
@@ -145,11 +147,11 @@ export default function Register() {
             type="button"
             disabled={flag}
             onClick={handleRegistration}
-            className="flex flex-row items-center justify-center text-xs font-bold text-white border-2 rounded-full px-4 border-green-500 hover:bg-green-700 tablet:px-8 py-1 tablet:text-lg"
+            className="flex flex-row items-center justify-center text-xs font-bold dark:text-white text-black border-2 rounded-full px-4 border-green-500 hover:bg-green-700 tablet:px-8 py-1 tablet:text-lg"
           >
             {flag ? (
               <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                className="animate-spin -ml-1 mr-3 h-5 w-5 dark:text-white text-black"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -177,7 +179,7 @@ export default function Register() {
       <div className="w-0 tablet:w-1/2">
         <img
           alt="register for drop ship"
-          src={require("../assets/images/RegisterPage.jpg")}
+          src={require("../../assets/images/RegisterPage.jpg")}
           className="h-0 w-0 tablet:h-screen tablet:w-full"
         />
       </div>
