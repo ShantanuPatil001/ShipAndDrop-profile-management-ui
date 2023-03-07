@@ -3,7 +3,7 @@ import UserInfo from "../../components/profile/user-info";
 
 const ProfileDashboard = () => {
   return (
-    <div className="tablet:pt-24 pt-20 bg-white dark:bg-black">
+    <div className="tablet:pt-24 pt-20s">
       <UserInfo avatar={''} displayName={''} email={''} phoneNumber={''} />
     </div>
   );

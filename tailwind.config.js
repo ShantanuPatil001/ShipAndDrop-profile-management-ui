@@ -2,6 +2,7 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    darkMode: ['class', '[data-mode="dark"]'],
     screens: {
       'tablet': '640px',
       // => @media (min-width: 640px) { ... }
@@ -12,6 +13,7 @@ module.exports = {
       'desktop': '1280px',
       // => @media (min-width: 1280px) { ... }
     },
+    
   },
   plugins: [],
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 const UserInfo = (props) => {
   return (
-    <div className="tablet:border-8 tablet:border-blue-500 rounded-3xl flex flex-col tablet:flex-row tablet:mx-36">
+    <div className="card rounded-3xl flex flex-col tablet:flex-row tablet:mx-36">
       <div className="flex flex-col items-center space-y-5 px-8 py-8 tablet:w-1/4">
         <img
           src={require("./pro-pic.jpeg")}
@@ -19,7 +19,7 @@ const UserInfo = (props) => {
           <input
             type="text"
             value="shantanu706@gmail.com "
-            className="dark:bg-black w-full text-gray-500 dark:text-gray-100"
+            className="bg-card-background w-full text-gray-500 dark:text-gray-100"
             disabled
           />
         </fieldset>
@@ -30,7 +30,7 @@ const UserInfo = (props) => {
           <input
             type="text"
             value="+91&nbsp;7776018272"
-            className="dark:bg-black w-full text-gray-500 dark:text-gray-100"
+            className="bg-card-background w-full text-gray-500 dark:text-gray-100"
             disabled
           />
         </fieldset>

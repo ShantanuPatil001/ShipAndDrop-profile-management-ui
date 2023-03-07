@@ -13,8 +13,11 @@ button:focus {
 @tailwind utilities;
 
 html {
-    @apply dark:text-white;
-    @apply dark:bg-black;
-    @apply text-black;
-    @apply bg-white;
 }
+
+.card {
+    background-color: rgb(18, 18, 18);
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.6');
+    box-shadow: theme('boxShadow.xl');
+  }
